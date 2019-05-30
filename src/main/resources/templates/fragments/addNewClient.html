@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<th:block th:fragment="addNewClientModal">
+    <div th:id="'add-new-client-modal'" class="modal fade " tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавить клиента как - </h5>
+                    <span type="hidden" class="font-14 p-t-2" id="client-status"></span>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id = "client-info-container" class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="col-md-12" id="column1">
+                                <form id="client-from" data-toggle="validator" role="form" onsubmit="return false;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span id = "message"></span>
+                                            <div class="form-group">
+                                                <label for="edit-client-first-name">Имя</label>
+                                                <input class="form-control" required = "required" id="edit-client-first-name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-last-name">Фамилия</label>
+                                                <input class="form-control" id="edit-client-last-name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-phone-number">Номер телефона</label>
+                                                <input type="tel" class="form-control" id="edit-client-phone-number"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-email">Email</label>
+                                                <input type="email" class="form-control" data-error="Неверный формат Email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" id="edit-client-email"/>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-skype">Skype</label>
+                                                <input type="text" class="form-control" id="edit-client-skype"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-age">Возраст</label>
+                                                <input type="number" class="form-control" min="0" max="127" title = "Диапазон от 0 до 127" onkeydown="disableInputE()"  id="edit-client-age"/>
+                                                <div class="help-block with-error" style="color: red"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-sex">Выберите пол</label>
+                                                <select class="form-control" id="edit-client-sex">
+                                                    <option>MALE</option>
+                                                    <option>FEMALE</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="edit-client-state">Статус</label>
+                                                <select class="form-control" id="edit-client-state">
+                                                    <option text="Выбрать статус">----- Выбрать статус -----</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-country">Страна</label>
+                                                <input type="text" class="form-control" id="edit-client-country"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-client-city">Город</label>
+                                                <input type="text" class="form-control" id="edit-client-city"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Социальные сети</label>
+                                                <table class="table table-hover" id = "SocialNetworks">
+                                                    <thead class="thead-inverse">
+                                                    <tr>
+                                                        <th hidden="hidden" abbr="id">id</th>
+                                                        <th abbr="link">Link</th>
+                                                        <th abbr="socialProfileType">Type</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id = "SN-table-body">
+                                                    </tbody>
+                                                </table>
+                                                <a href="#" class="btn btn-sm btn-info m-t-10" id="addNewSN" onclick="addNewSN()">Добавить соц. сеть</a>
+                                            </div>
+                                            <div class="form-group m-t-10">
+                                                    <label>Работа</label>
+                                                    <table class="table table-hover" th:id = "Job">
+                                                        <thead class="thead-inverse">
+                                                        <tr>
+                                                            <th hidden="hidden" abbr="id">id</th>
+                                                            <th abbr="organization">Организация</th>
+                                                            <th abbr="position">Позиция</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id = "job-table-body">
+                                                        </tbody>
+                                                    </table>
+                                                <a href="#" class="btn btn-sm btn-info m-t-10" id="addNewJob" onclick="addNewJob()">Добавить работу</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/client" class="btn btn-secondary" id="backToMain" data-dismiss="modal">Назад</a>
+                    <a href="#" class="btn btn-primary" id="saveChanges" th:onclick="'addClient()'">Добавить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<script type="text/javascript" th:src="@{/js/client-info.js}"></script>
+</body>
+</html>

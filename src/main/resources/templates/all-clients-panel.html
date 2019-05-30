@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Управление клиентами</title>
+    <meta charset="UTF-8"/>
+    <div th:replace="fragments/htmlFragments::header-main-table"></div>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <div th:replace="fragments/htmlFragments::top-navbar"></div>
+    <div th:replace="fragments/htmlFragments::left-sidebar"></div>
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content ">
+                <!-- ============================================================== -->
+                <!-- pageheader  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">E-commerce Dashboard Template </h2>
+                            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel
+                                mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard
+                                            Template
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader  -->
+                <!-- ============================================================== -->
+                <div class="scrollbar">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12"
+                             th:id="'status-column'+${status.id}"
+                             th:each="status : ${statuses}"
+                             th:if="${!status.invisible}">
+                            <div id="column-header" class="col-md-12 col-12 pt-3 border-top border-top-primary border-3">
+                                <div class="row">
+                                    <div class="column col-md-12 col-12"
+                                         th:value="${status.id}">
+                                        <div class="d-flex">
+                                            <h5 class="mb-0 text-muted"><span th:text="${status.name}"></span></h5>
+                                            <div class="dropdown ml-auto mb-2">
+                                                <a class="toolbar createNewClient"
+                                                   th:attr="data-status-name=${status.name}"
+                                                   href="#">
+                                                    <span class="position-relative top-minus-2 font-12">Add new client</span>
+                                                    <i class="mdi mdi-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card portlet position-relative"
+                                             th:name = "'client-'+${client.id} + '-modal'"
+                                             th:each="client : ${status.clients}"
+                                             th:if="${client.active}"
+                                             th:value="${client.id}">
+                                            <div class="dropdown ml-auto card-menu" th:id="'option_' + ${client.id}">
+                                                <a class="toolbar breadcrumb-link card-dot-menu" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="font-22 mdi mdi mdi-dots-vertical"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
+                                                     style="position: absolute; transform: translate3d(18px, 23px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                    <a class="dropdown-item delete-client" th:attrappend="data-clientid=${client.id}" href="#">Удалить клиента</a>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown ml-auto add-manager-in-card">
+                                                <div class="avatar-group top-minus-5">
+                                                    <div class="user-avatar" th:id="'info-client' + ${client.id}">
+                                                                <span th:if="${client.ownerUser != null}" class="user-icon d-inline-block rounded-circle user-avatar-md font-12 text-center p-t-7"
+                                                                      th:text="${#strings.substring(client.ownerUser.firstName, 0,1)
+                                  + #strings.substring(client.ownerUser.lastName, 0,1)}"
+                                                                      th:value="${client.ownerUser.firstName} + ' ' + ${client.ownerUser.lastName}"
+                                                                      th:id="'own-' + ${client.id}">
+                                                                </span>
+                                                    </div>
+                                                </div>
+                                                <a class="toolbar breadcrumb-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="font-22 mdi mdi-plus-circle-outline"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(18px, 23px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                    <span class="dropdown-header">Назначить менеджера</span>
+                                                    <a class="dropdown-item" href="#"
+                                                       th:each="worker : ${users}">
+                                                                <span th:text="${worker.fullName}"
+                                                                      th:onclick="'assignUser('+${client.id}+','+${worker.id}+','+${user.id}+')'"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-main portlet-body" th:attr="data-card-id=${client.id}">
+                                            <div class="card-body portlet-header">
+                                                <div class="metric-value">
+                                                    <div class="d-flex">
+                                                        <span class="font-12 badge badge-secondary m-b-10">Big</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <h3 class="mb-1" th:text="${client.name}"></h3>
+                                                        <span class="ml-2 mt-1">
+                                                        <span class="badge-dot badge-danger"></span>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="d-flex quantity-comments">
+                                                    <a th:if="${client.comments.size() != 0}" href="#" class="font-12 p-t-5">
+                                                        <i class="font-16 mdi mdi-message-text"></i>
+                                                        <span th:text="${client.comments.size()}" class="position-relative d-inline-block top-minus-2"></span>
+                                                        <span class="position-relative top-minus-2 d-inline-block"> new message</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div th:replace="fragments/htmlFragments::footer-block"></div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<div th:replace="fragments/htmlFragments::client_description_modal"></div>
+<div th:replace="fragments/clientInfoModal::mainModalWindow"></div>
+<div th:replace="fragments/addNewClient::addNewClientModal"></div>
+<div th:replace="fragments/htmlFragments::deleteNotifications"></div>
+<!-- ============================================================== -->
+<!-- end main wrapper  -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="/vendor/charts/c3charts/c3.min.js"></script>
+<script src="/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="/js/dashboard-ecommerce.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.4/jquery.textcomplete.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript" th:src="@{/js/moment-timezone.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/add-client.js}"></script>
+<script type="text/javascript" th:src="@{/js/main-table.js}"></script>
+<script type="text/javascript" th:src="@{/js/comments.js}"></script>
+<script type="text/javascript" th:src="@{/js/status.js}"></script>
+<script type="text/javascript" th:src="@{/js/clientHistory.js}"></script>
+<script type="text/javascript" th:src="@{/js/settings-remainder.js}"></script>
+<script type="text/javascript" th:src="@{/js/validator.min.js}"></script>
+</body>
+
+</html>

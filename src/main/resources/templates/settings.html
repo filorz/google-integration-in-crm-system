@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Настройки пользователя</title>
+    <meta charset="UTF-8"/>
+    <div th:replace="fragments/htmlFragments::header-main-table"></div>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <div th:replace="fragments/htmlFragments::top-navbar"></div>
+    <div th:replace="fragments/htmlFragments::left-sidebar"></div>
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+
+            <div class="col-md-8 col-md-offset-2">
+                <div><h3>Настройки</h3></div>
+                <h1>Настройка google авторизации:</h1>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2" id="notification-buttons">
+                <div class="inline">
+                    <form class="form" method="get" action="/login/google">
+                        <input type="submit" class="btn btn btn-success pul" value="Авторизация Google"/>
+                    </form>
+                </div>
+
+                <div id="change-profile-button" class="m-t-10">
+                    <a th:href="'/admin/user/' + ${#authentication.getPrincipal().getId()}">
+                        <button th:authorize="hasAnyAuthority('OWNER', 'ADMIN')" class="btn btn-primary pul">Изменить профиль
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:replace="fragments/payment-notification-modal::paymentNotificationModal"></div>
+<script type="text/javascript" th:src="@{/js/main-table.js}"></script>
+<script type="text/javascript" th:src="@{/js/user-customize.js}"></script>
+<script type="text/javascript" th:src="@{/js/choice-status-column.js}"></script>
+
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="/vendor/charts/c3charts/c3.min.js"></script>
+<script src="/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="/js/dashboard-ecommerce.js"></script>
+</body>
+</html>

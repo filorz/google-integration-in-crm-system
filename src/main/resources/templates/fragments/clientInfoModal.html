@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+<th:block th:fragment="mainModalWindow">
+    <div th:id="'main-modal-window'" class="modal fade main-modal" role="dialog" data-keyboard="false">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" th:onclick="'backUrl()'" data-dismiss="modal">&times;</button>
+                </div>
+                <div>
+                    <ul class="country-sales list-group list-group-flush">
+                        <li class="country-sales-content list-group-item">
+                            <span class="">Электронная почта:</span>
+                            <span class="float-right text-dark" id="client-email"></span>
+                        </li>
+                        <li class="list-group-item country-sales-content">
+                            <span class="">Номер телефона:</span>
+                            <span class="float-right text-dark" id="client-phone"></span>
+                        </li>
+                        <li class="list-group-item country-sales-content">
+                            <span class="">Возраст:</span>
+                            <span class="float-right text-dark" id="client-age"></span>
+                        </li>
+                        <li class="list-group-item country-sales-content">
+                            <span class="">Пол:</span>
+                            <span class="float-right text-dark" id="client-sex"></span>
+                        </li>
+                        <li class="list-group-item country-sales-content">
+                            <span class="">Социальные сети:</span>
+                            <span class="float-right text-dark">
+                                <a id="fb-href" target="_blank">
+                                    <span class="social-sales-icon-circle facebook-bgcolor mr-2">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </span>
+                                </a>
+                                <a id="vk-href" target="_blank">
+                                    <span class="social-sales-icon-circle facebook-bgcolor mr-2">
+                                        <i class="fab fa-vk"></i>
+                                    </span>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-secondary">
+                        <div class="skype-call-head p-0 text-center d-flex justify-content-center">
+                            <div id="assign-unassign-btns"></div>
+                        </div>
+                        <div class="skype-call-body"></div>
+                    </div>
+                </div>
+                <div th:replace="fragments/htmlFragments::comments"></div>
+                <div th:replace="fragments/htmlFragments::clientHistory"></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

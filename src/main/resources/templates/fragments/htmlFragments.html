@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<th:block th:fragment="top-navbar">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="/client">F L O R I D A</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item">
+                        <div id="custom-search" class="top-search-bar">
+                            <input class="form-control" type="text" placeholder="Search.."/>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown notification">
+                        <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
+                                class="indicator"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
+                            <li>
+                                <div class="notification-title"> Notification</div>
+                                <div class="notification-list">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action active">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img
+                                                        src="/images/avatar-2.jpg" alt=""
+                                                        class="user-avatar-md rounded-circle"/></div>
+                                                <div class="notification-list-user-block"><span
+                                                        class="notification-list-user-name">Jeremy Rakestraw</span>accepted
+                                                    your invitation to join the team.
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img
+                                                        src="/images/avatar-3.jpg" alt=""
+                                                        class="user-avatar-md rounded-circle"/></div>
+                                                <div class="notification-list-user-block"><span
+                                                        class="notification-list-user-name">John Abraham </span>is now
+                                                    following you
+                                                    <div class="notification-date">2 days ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img
+                                                        src="/images/avatar-4.jpg" alt=""
+                                                        class="user-avatar-md rounded-circle"/></div>
+                                                <div class="notification-list-user-block"><span
+                                                        class="notification-list-user-name">Monaan Pechi</span> is
+                                                    watching your main repository
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img
+                                                        src="/images/avatar-5.jpg" alt=""
+                                                        class="user-avatar-md rounded-circle"/></div>
+                                                <div class="notification-list-user-block"><span
+                                                        class="notification-list-user-name">Jessica Caruso</span>accepted
+                                                    your invitation to join the team.
+                                                    <div class="notification-date">2 min ago</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="list-footer"><a href="#">View all notifications</a></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"><img src="/images/avatar-1.jpg" alt=""
+                                                                           class="user-avatar-md rounded-circle"/></a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                             aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="nav-user-info">
+                                <h5 class="mb-0 text-white nav-user-name" th:text="${user.firstName} + ' ' +${user.lastName}"></h5>
+                                <span class="status"></span><span th:text="${user.getRole().get(0).getRoleName()}"></span>
+                            </div>
+                            <a class="dropdown-item" th:href="'/admin/user/'+${user.id}"><i class="fas fa-user mr-2"></i>Account</a>
+                            <a class="dropdown-item" href="/user/settings"><i class="fas fa-cog mr-2"></i>Setting</a>
+                            <a class="dropdown-item" href="/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+</th:block>
+
+<th:block th:fragment="left-sidebar">
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                    class="fa fa-fw fa-user-circle"></i>Home <span
+                                    class="badge badge-success">6</span></a>
+                            <div id="submenu-1" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/client">All clients</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/about-author">About author</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                               data-target="#submenu-2" aria-controls="submenu-2">
+                                <i class="fa fa-fw fa-rocket"></i>API application</a>
+                            <div id="submenu-2" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="pages/cards.html">Clients <span
+                                                class="badge badge-secondary">New</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="pages/general.html">Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="pages/carousel.html">Statuses</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+</th:block>
+
+<th:block th:fragment="header-main-table">
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css"/>
+    <link rel="stylesheet" href="/vendor/charts/chartist-bundle/chartist.css"/>
+    <link rel="stylesheet" href="/vendor/charts/morris-bundle/morris.css"/>
+    <link rel="stylesheet" href="/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css"/>
+    <link rel="stylesheet" href="/vendor/charts/c3charts/c3.css"/>
+    <link rel="stylesheet" href="/vendor/fonts/flag-icon-css/flag-icon.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+</th:block>
+
+<th:block th:fragment="header-login">
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css"/>
+</th:block>
+
+<th:block th:fragment="header-settings">
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css"/>
+</th:block>
+
+<th:block th:fragment="comments">
+    <div class="modal-footer">
+            <div class="form-group w-100">
+                <div class="panel-heading comment-div p-b-20 m-b-20 border-bottom">
+                    <span class="mr-2">
+                        <i class="far fa-comment-alt"></i>
+                    </span>
+                    <label for="new-text-for-client">
+                            <h4>Добавить комментарий:</h4>
+                    </label>
+                    <textarea class="form-control textcomplete graur-class"
+                                  th:id="'new-text-for-client'"
+                                  placeholder="Напишите комментарий"></textarea>
+                </div>
+                <ul class="list-unstyled main-modal-comment"></ul>
+            </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="clientHistory">
+    <div class="card-footer-item card-footer-item-bordered">
+        <div class="panel-group" id="actionsAccordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#actionsAccordion" class="upload-history collapsed">История действий</a>
+                    </h4>
+                </div>
+                <div th:id="'collapse'" class="panel-collapse collapse client-collapse">
+                    <div class="panel-body">
+                        <table class="table table-bordered history-line" th:id="'client-string-history'">
+                          <tbody></tbody>
+                        </table>
+                            <button type="button" data-page="1" class="btn upload-more-history">Загрузить ещё</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="addNewClientModal">
+    <div th:id="'add-new-client-modal'" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавить клиента</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="edit-client-first-name" class="col-form-label">Имя</label>
+                            <input id="edit-client-first-name" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-last-name" class="col-form-label">Фамилия</label>
+                            <input id="edit-client-last-name" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-phone-number" class="col-form-label">Номер телефона</label>
+                            <input id="edit-client-phone-number" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-phone-number" class="col-form-label">Email</label>
+                            <input data-error="Неверный формат Email"
+                                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" id="edit-client-email"
+                                   type="text"
+                                   class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-skype" class="col-form-label">Skype</label>
+                            <input id="edit-client-skype" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-age" class="col-form-label">Возраст</label>
+                            <input id="edit-client-age" type="text" class="form-control"
+                                   min="0" max="127"
+                                   title = "Диапазон от 0 до 127"
+                                   onkeydown="disableInputE()"/>
+                            <div class="help-block with-error" style="color: red"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-sex">Выберите пол</label>
+                            <select class="form-control" id="edit-client-sex">
+                                <option>Мужской</option>
+                                <option>Женский</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-state">Статус</label>
+                            <select class="form-control" id="edit-client-state">
+                                <option th:each="state: ${states}" th:value="${state}" th:text="${state}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-country">Страна</label>
+                            <input type="text" class="form-control" id="edit-client-country"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-client-city">Город</label>
+                            <input type="text" class="form-control" id="edit-client-city"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Социальные сети</label>
+                            <table class="table table-hover" th:id = "SocialNetworks">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th hidden="hidden" abbr="id">id</th>
+                                    <th abbr="link">Link</th>
+                                    <th abbr="socialProfileType">Type</th>
+                                </tr>
+                                </thead>
+                                <tbody id = "SN-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-md btn-info" id = "addNewJob" th:onclick="'addNewJob()'">Добавить работу</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="/client" class="btn btn-secondary" id="backToMain" data-dismiss="modal">Закрыть</a>
+                    <a href="#" class="btn btn-primary" id="saveChanges" th:onclick="'addClient()'">Сохранить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="client_description_modal">
+    <div id="clientDescriptionModal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <h5>Введите заметку</h5>
+                            <textarea class="form-control" id="content-area" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm" id="save-description">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="footer-block">
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    Copyright © 2018 Concept. All rights reserved.
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="javascript: void(0);">API</a>
+                        <a href="javascript: void(0);">Contacts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block th:fragment="deleteNotifications">
+    <div id="delete-client-modal" class="modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Подтвердите свое действие</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите удалить карточку?</p>
+                </div>
+                <div class="modal-footer">
+                    <button  id ="delete-client-btn"   type="button" class="btn btn-primary" data-dismiss="modal">Да</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

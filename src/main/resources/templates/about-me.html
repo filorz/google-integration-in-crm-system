@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Об авторе</title>
+    <meta charset="UTF-8"/>
+    <div th:replace="fragments/htmlFragments::header-main-table"></div>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <div th:replace="fragments/htmlFragments::top-navbar"></div>
+    <div th:replace="fragments/htmlFragments::left-sidebar"></div>
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+            <div class="row">
+                <div class="col-md-2 text-center">
+                    <span class="user-avatar user-avatar-xxl">
+                        <img src="/images/avatar-author.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl"/>
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <h1>About me</h1>
+                    <p>My name is Philipp Bogdanov, i'm Java engineer and this is my small project for the development of services
+                        and integration with a google calendar API.</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="/vendor/charts/chartist-bundle/chartist.min.js"></script>
+<!-- sparkline js -->
+<script src="/vendor/charts/sparkline/jquery.sparkline.js"></script>
+<!-- morris js -->
+<script src="/vendor/charts/morris-bundle/raphael.min.js"></script>
+<script src="/vendor/charts/morris-bundle/morris.js"></script>
+<!-- chart c3 js -->
+<script src="/vendor/charts/c3charts/c3.min.js"></script>
+<script src="/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="/vendor/charts/c3charts/C3chartjs.js"></script>
+<script src="/js/dashboard-ecommerce.js"></script>
+</body>
+</html>
