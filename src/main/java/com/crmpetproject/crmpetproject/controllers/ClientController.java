@@ -23,23 +23,25 @@ import java.util.stream.Collectors;
 public class ClientController {
 
     private static Logger logger = LoggerFactory.getLogger(ClientController.class);
-	private final StatusService statusService;
+	private StatusService statusService;
 	private final ClientService clientService;
 	private final UserService userService;
 	private final SocialProfileTypeService socialProfileTypeService;
 	private final RoleService roleService;
 
-
     @Value("${project.pagination.page-size.clients}")
     private int pageSize;
 
 	@Autowired
-	public ClientController(StatusService statusService,
-							ClientService clientService,
+	public void setStatusService(StatusService statusService) {
+		this.statusService = statusService;
+	}
+
+	@Autowired
+	public ClientController(ClientService clientService,
 							UserService userService,
 							SocialProfileTypeService socialProfileTypeService,
 							RoleService roleService) {
-		this.statusService = statusService;
 		this.clientService = clientService;
 		this.userService = userService;
 		this.socialProfileTypeService = socialProfileTypeService;

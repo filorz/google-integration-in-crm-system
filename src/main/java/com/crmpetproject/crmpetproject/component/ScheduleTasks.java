@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 @EnableScheduling
-@PropertySource(value = "file:./skype-message.properties", encoding = "Cp1251")
+//@PropertySource(value = "file:./skype-message.properties", encoding = "Cp1251")
 public class ScheduleTasks {
 
 	private final ClientService clientService;

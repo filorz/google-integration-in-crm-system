@@ -17,13 +17,17 @@ import java.util.Optional;
 @Service
 public class StatusServiceImpl implements StatusService {
 	private final StatusDAO statusDAO;
-	private final ClientService clientService;
+	private ClientService clientService;
 
 	private static Logger logger = LoggerFactory.getLogger(StatusServiceImpl.class);
 
 	@Autowired
-	public StatusServiceImpl(StatusDAO statusDAO, ClientService clientService) {
+	public StatusServiceImpl(StatusDAO statusDAO) {
 		this.statusDAO = statusDAO;
+	}
+
+	@Autowired
+	public void setClientService(ClientService clientService) {
 		this.clientService = clientService;
 	}
 
