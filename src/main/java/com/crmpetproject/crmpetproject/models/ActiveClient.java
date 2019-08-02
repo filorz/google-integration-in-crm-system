@@ -9,9 +9,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Table(name = "student")
+@Table(name = "active_client")
 @Entity
-public class Student implements Diffable<Student> {
+public class ActiveClient implements Diffable<ActiveClient> {
 
     @Id
     @GeneratedValue
@@ -39,15 +39,15 @@ public class Student implements Diffable<Student> {
 
     @JoinColumn(name = "status_id")
     @OneToOne
-    private StudentStatus status;
+    private ActiveClientStatus status;
 
     @Column(name = "notes")
     private String notes;
 
-    public Student() {
+    public ActiveClient() {
     }
 
-    public Student(Client client, LocalDateTime trialEndDate, LocalDateTime nextPaymentDate, BigDecimal price, BigDecimal paymentAmount, BigDecimal payLater, StudentStatus status, String notes) {
+    public ActiveClient(Client client, LocalDateTime trialEndDate, LocalDateTime nextPaymentDate, BigDecimal price, BigDecimal paymentAmount, BigDecimal payLater, ActiveClientStatus status, String notes) {
         this.client = client;
         this.trialEndDate = trialEndDate;
         this.nextPaymentDate = nextPaymentDate;
@@ -114,11 +114,11 @@ public class Student implements Diffable<Student> {
         this.payLater = payLater;
     }
 
-    public StudentStatus getStatus() {
+    public ActiveClientStatus getStatus() {
         return status;
     }
 
-    public void setStatus(StudentStatus status) {
+    public void setStatus(ActiveClientStatus status) {
         this.status = status;
     }
 
@@ -146,7 +146,7 @@ public class Student implements Diffable<Student> {
     }
 
     @Override
-    public DiffResult diff(Student student) {
+    public DiffResult diff(ActiveClient student) {
         return new DiffBuilder(this, student, ToStringStyle.JSON_STYLE)
                 .append("Клиент", this.client.getId(), student.client.getId())
                 .append("Дата пробных", this.trialEndDate.toLocalDate(), student.trialEndDate.toLocalDate())

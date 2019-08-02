@@ -131,8 +131,8 @@ public class Client implements Serializable, Diffable<Client> {
 
     @JsonIgnore
     @OneToOne(mappedBy = "client")
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "active_client_id")
+    private ActiveClient activeClient;
 
 
     public Client() {
@@ -379,12 +379,12 @@ public class Client implements Serializable, Diffable<Client> {
         this.socialProfiles = socialProfiles;
     }
 
-    public Student getStudent() {
-        return student;
+    public ActiveClient getActiveClient() {
+        return activeClient;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudent(ActiveClient activeClient) {
+        this.activeClient = activeClient;
     }
 
     @Override

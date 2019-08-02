@@ -36,10 +36,10 @@ public class DataInitializer {
 	private ClientHistoryService clientHistoryService;
 
 	@Autowired
-	private StudentService studentService;
+	private ActiveClientService studentService;
 
 	@Autowired
-	private StudentStatusService studentStatusService;
+	private ActiveClientStatusService studentStatusService;
 
 	private void init() {
 
@@ -137,13 +137,13 @@ public class DataInitializer {
 		statusService.addInit(status4);
 		statusService.addInit(defaultStatus);
 
-        StudentStatus trialStatus = studentStatusService.add(new StudentStatus("Big"));
-        StudentStatus learningStatus = studentStatusService.add(new StudentStatus("Middle"));
-        StudentStatus pauseStatus = studentStatusService.add(new StudentStatus("Small"));
+        ActiveClientStatus trialStatus = studentStatusService.add(new ActiveClientStatus("Big"));
+        ActiveClientStatus learningStatus = studentStatusService.add(new ActiveClientStatus("Middle"));
+        ActiveClientStatus pauseStatus = studentStatusService.add(new ActiveClientStatus("Small"));
 
-        Student trialStudent = new Student(clientService.getClientByEmail("i.fiod@mail.ru"), LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3), new BigDecimal(12000.00), new BigDecimal(8000.00), new BigDecimal(4000.00), trialStatus, "На пробных");
-        Student learningStudent = new Student(clientService.getClientByEmail("vboyko@mail.ru"), LocalDateTime.now(), LocalDateTime.now().plusDays(30), new BigDecimal(12000.00), new BigDecimal(8000.00), new BigDecimal(4000.00), learningStatus, "Быстро учится");
-        Student pauseStudent = new Student(clientService.getClientByEmail("a.solo@mail.ru"), LocalDateTime.now(), LocalDateTime.now().plusDays(14), new BigDecimal(12000.00), new BigDecimal(12000.00), new BigDecimal(0.00), pauseStatus, "Уехал в отпуск на 2 недели");
+        ActiveClient trialStudent = new ActiveClient(clientService.getClientByEmail("i.fiod@mail.ru"), LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3), new BigDecimal(12000.00), new BigDecimal(8000.00), new BigDecimal(4000.00), trialStatus, "На пробных");
+        ActiveClient learningStudent = new ActiveClient(clientService.getClientByEmail("vboyko@mail.ru"), LocalDateTime.now(), LocalDateTime.now().plusDays(30), new BigDecimal(12000.00), new BigDecimal(8000.00), new BigDecimal(4000.00), learningStatus, "Быстро учится");
+        ActiveClient pauseStudent = new ActiveClient(clientService.getClientByEmail("a.solo@mail.ru"), LocalDateTime.now(), LocalDateTime.now().plusDays(14), new BigDecimal(12000.00), new BigDecimal(12000.00), new BigDecimal(0.00), pauseStatus, "Уехал в отпуск на 2 недели");
         studentService.add(trialStudent);
         studentService.add(learningStudent);
         studentService.add(pauseStudent);

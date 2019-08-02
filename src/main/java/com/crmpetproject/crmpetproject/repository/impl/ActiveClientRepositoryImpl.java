@@ -1,7 +1,7 @@
 package com.crmpetproject.crmpetproject.repository.impl;
 
-import com.crmpetproject.crmpetproject.models.Student;
-import com.crmpetproject.crmpetproject.repository.interfaces.StudentRepositoryCustom;
+import com.crmpetproject.crmpetproject.models.ActiveClient;
+import com.crmpetproject.crmpetproject.repository.interfaces.ActiveClientRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class StudentRepositoryImpl implements StudentRepositoryCustom {
+public class ActiveClientRepositoryImpl implements ActiveClientRepositoryCustom {
 
     private final EntityManager entityManager;
 
     @Autowired
-    public StudentRepositoryImpl(EntityManager entityManager) {
+    public ActiveClientRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public List<Student> getStudentsWithTodayNotificationsEnabled() {
+    public List<ActiveClient> getStudentsWithTodayNotificationsEnabled() {
         LocalDateTime today = LocalDate.now().atStartOfDay();
         LocalDateTime tomorrow = LocalDate.now().plusDays(1).atStartOfDay();
         return entityManager.createQuery("SELECT s FROM Student s WHERE (((s.notifyEmail = TRUE)" +
@@ -33,7 +33,7 @@ public class StudentRepositoryImpl implements StudentRepositoryCustom {
     }
 
     @Override
-    public void detach(Student student) {
+    public void detach(ActiveClient student) {
         entityManager.detach(student);
     }
 }

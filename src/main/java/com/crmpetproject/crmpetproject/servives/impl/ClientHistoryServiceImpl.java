@@ -206,7 +206,7 @@ public class ClientHistoryServiceImpl implements ClientHistoryService {
 	 * @return client history object.
 	 */
 	@Override
-	public ClientHistory createStudentUpdateHistory(User user, Student prev, Student current, ClientHistory.Type type) {
+	public ClientHistory createStudentUpdateHistory(User user, ActiveClient prev, ActiveClient current, ClientHistory.Type type) {
 		logger.debug("creation of student history...");
 		ClientHistory clientHistory = new ClientHistory(type);
 		clientHistory.setTitle(user.getFullName() + " " + type.getInfo());

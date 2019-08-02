@@ -3,8 +3,8 @@ package com.crmpetproject.crmpetproject.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student_status")
-public class StudentStatus {
+@Table(name = "active_client_status")
+public class ActiveClientStatus {
 
     @Id
     @GeneratedValue
@@ -14,16 +14,16 @@ public class StudentStatus {
     @Column(name = "status")
     private String status;
 
-    public StudentStatus() {
+    public ActiveClientStatus() {
     }
 
-    public StudentStatus(String status) {
+    public ActiveClientStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "StudentStatus{" + "id=" + id + ", status='" + status + "'}";
+        return "ActiveClientStatus{" + "id=" + id + ", status='" + status + "'}";
     }
 
     public Long getId() {

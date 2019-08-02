@@ -1,8 +1,8 @@
 package com.crmpetproject.crmpetproject.controllers.rest;
 
-import com.crmpetproject.crmpetproject.models.StudentStatus;
-import com.crmpetproject.crmpetproject.servives.interfaces.StudentService;
-import com.crmpetproject.crmpetproject.servives.interfaces.StudentStatusService;
+import com.crmpetproject.crmpetproject.models.ActiveClientStatus;
+import com.crmpetproject.crmpetproject.servives.interfaces.ActiveClientService;
+import com.crmpetproject.crmpetproject.servives.interfaces.ActiveClientStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +20,24 @@ public class StudentStatusRestController {
 
     private static Logger logger = LoggerFactory.getLogger(StudentStatusRestController.class);
 
-    private final StudentStatusService studentStatusService;
-    private final StudentService studentService;
+    private final ActiveClientStatusService studentStatusService;
+    private final ActiveClientService studentService;
 
     @Autowired
-    public StudentStatusRestController(StudentStatusService studentStatusService, StudentService studentService) {
+    public StudentStatusRestController(ActiveClientStatusService studentStatusService, ActiveClientService studentService) {
         this.studentStatusService = studentStatusService;
         this.studentService = studentService;
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentStatus>> getAllStudentStatuses() {
+    public ResponseEntity<List<ActiveClientStatus>> getAllStudentStatuses() {
         return ResponseEntity.ok(studentStatusService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentStatus> getStudentById(@PathVariable("id") Long id) {
+    public ResponseEntity<ActiveClientStatus> getStudentById(@PathVariable("id") Long id) {
         ResponseEntity result;
-        StudentStatus status = studentStatusService.get(id);
+        ActiveClientStatus status = studentStatusService.get(id);
         if (status != null) {
             result = ResponseEntity.ok(status);
         } else {
@@ -50,7 +50,7 @@ public class StudentStatusRestController {
     @GetMapping("/delete/{id}")
     public HttpStatus deleteStudentStatus(@PathVariable("id") Long id) {
         HttpStatus result;
-        if (studentService.getStudentsByStatusId(id).isEmpty()) {
+        if (studentService.getActiveClientByStatusId(id).isEmpty()) {
             studentStatusService.delete(id);
             result = HttpStatus.OK;
         } else {
@@ -61,13 +61,13 @@ public class StudentStatusRestController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createStudentStatus(@RequestBody StudentStatus studentStatus) {
+    public HttpStatus createStudentStatus(@RequestBody ActiveClientStatus studentStatus) {
         studentStatusService.add(studentStatus);
         return HttpStatus.OK;
     }
 
     @PostMapping("/update")
-    public HttpStatus updateStudentStatus(@RequestBody StudentStatus status) {
+    public HttpStatus updateStudentStatus(@RequestBody ActiveClientStatus status) {
         studentStatusService.update(status);
         return HttpStatus.OK;
     }

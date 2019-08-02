@@ -1,6 +1,6 @@
 package com.crmpetproject.crmpetproject.controllers;
 
-import com.crmpetproject.crmpetproject.servives.interfaces.StudentStatusService;
+import com.crmpetproject.crmpetproject.servives.interfaces.ActiveClientStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ public class StudentStatusController {
 
     private static Logger logger = LoggerFactory.getLogger(StudentStatusController.class);
 
-    private final StudentStatusService studentStatusService;
+    private final ActiveClientStatusService studentStatusService;
 
     @Autowired
-    public StudentStatusController(StudentStatusService studentStatusService) {
+    public StudentStatusController(ActiveClientStatusService studentStatusService) {
         this.studentStatusService = studentStatusService;
     }
 

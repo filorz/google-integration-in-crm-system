@@ -2,11 +2,11 @@ package com.crmpetproject.crmpetproject.controllers.rest;
 
 import com.crmpetproject.crmpetproject.models.Client;
 import com.crmpetproject.crmpetproject.models.ClientHistory;
-import com.crmpetproject.crmpetproject.models.Student;
+import com.crmpetproject.crmpetproject.models.ActiveClient;
 import com.crmpetproject.crmpetproject.models.User;
 import com.crmpetproject.crmpetproject.servives.interfaces.ClientHistoryService;
 import com.crmpetproject.crmpetproject.servives.interfaces.ClientService;
-import com.crmpetproject.crmpetproject.servives.interfaces.StudentService;
+import com.crmpetproject.crmpetproject.servives.interfaces.ActiveClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,37 +15,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/rest/student")
 @PreAuthorize("hasAnyAuthority('OWNER')")
-public class StudentRestController {
+public class ActiveClientRestController {
 
-    private static Logger logger = LoggerFactory.getLogger(StudentRestController.class);
+    private static Logger logger = LoggerFactory.getLogger(ActiveClientRestController.class);
 
-    private final StudentService studentService;
+    private final ActiveClientService studentService;
 
     private final ClientService clientService;
 
     private final ClientHistoryService clientHistoryService;
 
     @Autowired
-    public StudentRestController(StudentService studentService, ClientService clientService, ClientHistoryService clientHistoryService) {
+    public ActiveClientRestController(ActiveClientService studentService, ClientService clientService, ClientHistoryService clientHistoryService) {
         this.studentService = studentService;
         this.clientService = clientService;
         this.clientHistoryService = clientHistoryService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable("id") Long id) {
+    public ResponseEntity<ActiveClient> getStudentById(@PathVariable("id") Long id) {
         ResponseEntity result;
-        Student student = studentService.get(id);
+        ActiveClient student = studentService.get(id);
         if (student != null) {
             result = ResponseEntity.ok(student);
         } else {
@@ -56,8 +50,8 @@ public class StudentRestController {
     }
 
     @PostMapping("/update")
-    public HttpStatus updateStudent(@RequestBody Student student, @AuthenticationPrincipal User userFromSession) {
-        Student previous = studentService.get(student.getId());
+    public HttpStatus updateStudent(@RequestBody ActiveClient student, @AuthenticationPrincipal User userFromSession) {
+        ActiveClient previous = studentService.get(student.getId());
         Client client = previous.getClient();
         client.addHistory(clientHistoryService.createStudentUpdateHistory(userFromSession, previous, student, ClientHistory.Type.UPDATE_STUDENT));
         studentService.update(student);

@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -27,13 +26,13 @@ public class StatusRestController {
 	private final StatusService statusService;
 	private final ClientService clientService;
 	private final ClientHistoryService clientHistoryService;
-	private final StudentService studentService;
+	private final ActiveClientService studentService;
 
 	@Autowired
 	public StatusRestController(StatusService statusService,
 								ClientService clientService,
 								ClientHistoryService clientHistoryService,
-								StudentService studentService) {
+								ActiveClientService studentService) {
 		this.statusService = statusService;
 		this.clientService = clientService;
 		this.clientHistoryService = clientHistoryService;
@@ -74,11 +73,11 @@ public class StatusRestController {
 		}
 		currentClient.setStatus(statusService.get(statusId));
 		currentClient.addHistory(clientHistoryService.createHistory(userFromSession, currentClient, ClientHistory.Type.STATUS));
-		if (currentClient.getStudent() == null) {
+		if (currentClient.getActiveClient() == null) {
 			currentClient.addHistory(clientHistoryService.creteStudentHistory(userFromSession, ClientHistory.Type.ADD_STUDENT));
 		}
 		clientService.updateClient(currentClient);
-		studentService.addStudentForClient(currentClient);
+		studentService.addActiveClientForClient(currentClient);
 		logger.info("{} has changed status of client with id: {} to status id: {}", userFromSession.getFullName(), clientId, statusId);
 		return ResponseEntity.ok().build();
 	}

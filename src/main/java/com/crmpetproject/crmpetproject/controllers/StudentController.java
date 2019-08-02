@@ -1,7 +1,7 @@
 package com.crmpetproject.crmpetproject.controllers;
 
 import com.crmpetproject.crmpetproject.servives.interfaces.StatusService;
-import com.crmpetproject.crmpetproject.servives.interfaces.StudentService;
+import com.crmpetproject.crmpetproject.servives.interfaces.ActiveClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 @PreAuthorize("hasAnyAuthority('OWNER')")
 public class StudentController {
 
-    private final StudentService studentService;
+    private final ActiveClientService studentService;
     private final StatusService statusService;
 
     @Autowired
-    public StudentController(StudentService studentService, StatusService statusService) {
+    public StudentController(ActiveClientService studentService, StatusService statusService) {
         this.studentService = studentService;
         this.statusService = statusService;
     }
